@@ -1,0 +1,44 @@
+ //This code can be used to decrypt a rotational cipher, it allows this through brute force, where you test a string of encrypted english text.
+// with all 26 keys until it forms an intelligible sentence, which can be viewed as the output of this code. 
+
+#include<stdio.h> //the library of functions I wish to use.
+#include<stdlib.h> //Included just in case needed when writing new code or editing code.
+
+ 
+int main()
+{
+	char message[100], ch;
+	int i, key;
+	
+	printf("Enter a message to decrypt: "); // encrypted text that you want in english.
+	gets(message); //system retrieves encrypted text.
+	printf("Enter key: "); //guess key until intelligible sentence forms.
+	scanf("%d", &key); //reads key input, the subs into any of the following equations depending on other variables.
+	
+	for(i = 0; message[i] != '\0'; ++i){
+		ch = message[i];
+		
+		if(ch >= 'a' && ch <= 'z'){
+			ch = ch - key;                        //from line 18 to 43 is the same coding for encryption but inverse functions so that we reverse the direction of roation to give us original message.
+			
+			if(ch < 'a'){
+				ch = ch + 'z' - 'a' + 1;
+			}
+			
+			message[i] = ch;
+		}
+		else if(ch >= 'A' && ch <= 'Z'){
+			ch = ch - key;
+			
+			if(ch < 'A'){
+				ch = ch + 'Z' - 'A' + 1;
+			}
+			
+			message[i] = ch;
+		}
+	}
+	
+	printf("Decrypted message: %s", message); //prints decrypted message.
+	
+	return 0; //Ends program.
+} 
